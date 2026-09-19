@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Payslip Generator</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- =========================
+         LEFT EDITOR PANEL
+    ========================== -->
+    <aside class="editor">
+
+        <h1>Payslip Generator</h1>
+
+        <p class="hint">
+            Edit all fields below. Preview updates automatically.
+        </p>
+
+
+        <!-- COMPANY -->
+        <h3>Company Details</h3>
+
+        <label>
+            Company Name
+            <input
+                id="companyName"
+                value="Apollo Hospitals Enterprise Limited"
+            >
+        </label>
+
+        <label>
+            Company Address
+            <textarea id="companyAddress">Off Seepat Road, Bilaspur
+Chhattisgarh - 495006</textarea>
+        </label>
+
+        <label>
+            Payslip Month
+            <input
+                id="payMonth"
+                value="JUNE 2026"
+            >
+        </label>
+
+
+        <!-- EMPLOYEE -->
+        <h3>Employee Details</h3>
+
+        <div class="grid2">
+
+            <label>
+                Employee ID
+                <input id="employeeId" value="1077573">
+            </label>
+
+            <label>
+                Employee Name
+                <input id="employeeName" value="Khushbu Sharma">
+            </label>
+
+            <label>
+                Designation
+                <input
+                    id="designation"
+                    value="Lead Nursing Administrator"
+                >
+            </label>
+
+            <label>
+                Band
+                <input id="band" value="2">
+            </label>
+
+            <label>
+                Department
+                <input id="department" value="Nursing">
+            </label>
+
+            <label>
+                PAN
+                <input id="pan" value="KHBPS1225R">
+            </label>
+
+            <label>
+                Location
+                <input id="location" value="BILASPUR">
+            </label>
+
+            <label>
+                Job Grade
+                <input id="jobGrade" value="12-A">
+            </label>
+
+            <label>
+                PF No.
+                <input
+                    id="pfNo"
+                    value="CGRAI00171710000002934"
+                >
+            </label>
+
+            <label>
+                Date of Birth
+                <input id="dob" value="22-MAR-1992">
+            </label>
+
+            <label>
+                Date of Joining
+                <input id="doj" value="09-FEB-2016">
+            </label>
+
+            <label>
+                UAN
+                <input id="uan" value="100744880674">
+            </label>
+
+            <label>
+                Gender
+                <input id="gender" value="Female">
+            </label>
+
+            <label>
+                Medical Insurance No.
+                <input id="medIns" value="NIC46995353">
+            </label>
+
+            <label>
+                ESI No.
+                <input id="esiNo" value="">
+            </label>
+
+            <label>
+                Bank Name
+                <input id="bankName" value="AXIS BANK">
+            </label>
+
+            <label>
+                IFSC Code
+                <input id="ifsc" value="UTIB0000164">
+            </label>
+
+            <label>
+                Bank A/c No.
+                <input
+                    id="bankAc"
+                    value="914010009372613"
+                >
+            </label>
+
+        </div>
+
+
+        <!-- EARNINGS -->
+        <h3>Earnings</h3>
+
+        <div id="earningsEditor"></div>
+
+        <button
+            class="secondary"
+            id="addEarn"
+        >
+            + Add Earning
+        </button>
+
+
+        <!-- DEDUCTIONS -->
+        <h3>Deductions</h3>
+
+        <div id="deductionsEditor"></div>
+
+        <button
+            class="secondary"
+            id="addDed"
+        >
+            + Add Deduction
+        </button>
+
+
+        <!-- ATTENDANCE -->
+        <h3>Attendance / Other</h3>
+
+        <div class="grid2">
+
+            <label>
+                Days in Month
+                <input
+                    id="daysMonth"
+                    type="number"
+                    value="30"
+                >
+            </label>
+
+            <label>
+                Arrear Days
+                <input
+                    id="arrearDays"
+                    type="number"
+                    value="0"
+                >
+            </label>
+
+            <label>
+                LOPR Days
+                <input
+                    id="loprDays"
+                    type="number"
+                    value="0"
+                >
+            </label>
+
+            <label>
+                LOP Days
+                <input
+                    id="lopDays"
+                    type="number"
+                    value="0"
+                >
+            </label>
+
+            <label>
+                Loan Type
+                <input id="loanType">
+            </label>
+
+            <label>
+                Loan Amount
+                <input id="loanAmount">
+            </label>
+
+            <label>
+                EMI Deducted Till Date
+                <input id="emiTill">
+            </label>
+
+            <label>
+                Balance For Month
+                <input id="balanceMonth">
+            </label>
+
+        </div>
+
+
+        <!-- ADDITIONAL -->
+        <label>
+            Additional Particulars
+            <textarea id="additional"></textarea>
+        </label>
+
+
+        <!-- FOOTER -->
+        <label>
+            Footer / Confidential Notice
+
+            <textarea id="footer">This document contains confidential information. This document is intended only for the employee concerned.
+
+If you received this document in error, please destroy it and notify the sender immediately.</textarea>
+
+        </label>
+
+
+        <!-- ACTION BUTTONS -->
+        <div class="actions">
+
+            <button id="printBtn">
+                Print / Save PDF
+            </button>
+
+            <button
+                class="secondary"
+                id="resetBtn"
+            >
+                Reset
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =========================
+         PAYSLIP PREVIEW
+    ========================== -->
+
+    <main class="preview-wrap">
+
+        <div
+            class="preview"
+            id="payslip"
+        >
+
+            <!-- HEADER -->
+
+            <header>
+
+                <div>
+
+                    <div
+                        class="company"
+                        data-out="companyName"
+                    ></div>
+
+                    <div
+                        class="address"
+                        data-out="companyAddress"
+                    ></div>
+
+                </div>
+
+
+                <div class="logo-box">
+
+                    LOGO
+
+                </div>
+
+            </header>
+
+
+            <!-- TITLE -->
+
+            <h2>
+                PAYSLIP FOR THE MONTH OF
+                <span data-out="payMonth"></span>
+            </h2>
+
+
+            <!-- EMPLOYEE INFORMATION -->
+
+            <section class="info-grid">
+
+                <div>
+                    <b>Employee ID</b>
+                    <span data-out="employeeId"></span>
+                </div>
+
+                <div>
+                    <b>Employee Name</b>
+                    <span data-out="employeeName"></span>
+                </div>
+
+                <div>
+                    <b>Designation</b>
+                    <span data-out="designation"></span>
+                </div>
+
+                <div>
+                    <b>Band</b>
+                    <span data-out="band"></span>
+                </div>
+
+                <div>
+                    <b>Department</b>
+                    <span data-out="department"></span>
+                </div>
+
+                <div>
+                    <b>PAN</b>
+                    <span data-out="pan"></span>
+                </div>
+
+                <div>
+                    <b>Location</b>
+                    <span data-out="location"></span>
+                </div>
+
+                <div>
+                    <b>Job Grade</b>
+                    <span data-out="jobGrade"></span>
+                </div>
+
+                <div>
+                    <b>PF No.</b>
+                    <span data-out="pfNo"></span>
+                </div>
+
+                <div>
+                    <b>Date of Birth</b>
+                    <span data-out="dob"></span>
+                </div>
+
+                <div>
+                    <b>Date of Joining</b>
+                    <span data-out="doj"></span>
+                </div>
+
+                <div>
+                    <b>UAN</b>
+                    <span data-out="uan"></span>
+                </div>
+
+                <div>
+                    <b>Gender</b>
+                    <span data-out="gender"></span>
+                </div>
+
+                <div>
+                    <b>Med. Insurance No.</b>
+                    <span data-out="medIns"></span>
+                </div>
+
+                <div>
+                    <b>ESI No.</b>
+                    <span data-out="esiNo"></span>
+                </div>
+
+                <div>
+                    <b>Bank Name</b>
+                    <span data-out="bankName"></span>
+                </div>
+
+                <div>
+                    <b>IFSC Code</b>
+                    <span data-out="ifsc"></span>
+                </div>
+
+                <div>
+                    <b>Bank A/c No.</b>
+                    <span data-out="bankAc"></span>
+                </div>
+
+            </section>
+
+
+            <!-- EARNINGS / DEDUCTIONS -->
+
+            <table class="pay-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Earnings</th>
+                        <th>Amount</th>
+                        <th>YTD</th>
+
+                        <th>Deductions</th>
+                        <th>Amount</th>
+                        <th>YTD</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="payBody"></tbody>
+
+
+                <tfoot>
+
+                    <tr>
+
+                        <th>Total Earnings</th>
+                        <th id="totalEarn"></th>
+                        <th id="totalEarnYtd"></th>
+
+                        <th>Total Deductions</th>
+                        <th id="totalDed"></th>
+                        <th id="totalDedYtd"></th>
+
+                    </tr>
+
+                </tfoot>
+
+            </table>
+
+
+            <!-- NET PAY -->
+
+            <div class="netpay">
+
+                Net Pay
+
+                <strong id="netPay">
+                    Rs. 0.00
+                </strong>
+
+            </div>
+
+
+            <div class="words">
+
+                <b>In Words:</b>
+
+                <span id="netWords"></span>
+
+            </div>
+
+
+            <!-- LOAN -->
+
+            <table class="loan">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Loan Type</th>
+                        <th>Loan Amount</th>
+                        <th>EMI Deducted Till Date</th>
+                        <th>Balance For Month</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td id="loanTypeOut"></td>
+
+                        <td id="loanAmountOut"></td>
+
+                        <td id="emiTillOut"></td>
+
+                        <td id="balanceMonthOut"></td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+            <!-- ATTENDANCE -->
+
+            <table class="attendance">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Days In Month (A)</th>
+
+                        <th>Arrear Days (B)</th>
+
+                        <th>LOPR Days (C)</th>
+
+                        <th>LOP Days (D)</th>
+
+                        <th>
+                            Net Days Worked
+                            (E=A+B+C-D)
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td id="daysMonthOut"></td>
+
+                        <td id="arrearDaysOut"></td>
+
+                        <td id="loprDaysOut"></td>
+
+                        <td id="lopDaysOut"></td>
+
+                        <td id="netDaysOut"></td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+            <!-- ADDITIONAL PARTICULARS -->
+
+            <div class="additional">
+
+                <b>
+                    Additional Particulars for the month
+                </b>
+
+                <span id="additionalOut"></span>
+
+            </div>
+
+
+            <!-- FOOTER -->
+
+            <div
+                class="footer"
+                id="footerOut"
+            ></div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
